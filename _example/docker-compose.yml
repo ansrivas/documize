@@ -1,0 +1,30 @@
+version: '3'
+services:
+  documize-postgres-s:
+    image: postgres:11-alpine
+    container_name: documize-postgres-c
+    env_file:
+      - ./env.list
+    restart: always
+    networks:
+      - documize-internal
+    ports:
+      - 5431:5432
+  documize-ce-server-s:
+    image: ansrivas/documize-ce:latest
+    container_name: documize-ce-server-c
+    env_file:
+      - ./env.list
+    depends_on:
+      - documize-postgres-s
+    ports:
+      - 5001:5001
+    command: ["/usr/local/bin/documize"]
+    restart: always
+    networks:
+      - documize-internal
+networks:
+  documize-internal:
+    driver: bridge
+    ipam:
+      driver: default
