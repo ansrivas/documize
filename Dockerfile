@@ -1,6 +1,6 @@
 FROM alpine:latest
 
-ENV DOCUMIZEVERSION=v2.4.1
+ENV DOCUMIZEVERSION=v2.4.2
 
 RUN apk --update add --virtual build-dependencies wget  \
   && wget -O /usr/local/bin/documize https://github.com/documize/community/releases/download/${DOCUMIZEVERSION}/documize-community-linux-amd64 \
