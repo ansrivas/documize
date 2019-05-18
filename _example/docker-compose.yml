@@ -10,6 +10,9 @@ services:
       - documize-internal
     ports:
       - 5431:5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
   documize-ce-server-s:
     image: ansrivas/documize-ce:latest
     container_name: documize-ce-server-c
@@ -28,3 +31,6 @@ networks:
     driver: bridge
     ipam:
       driver: default
+volumes:
+  pgdata:
+    external: true
