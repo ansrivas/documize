@@ -1,11 +1,12 @@
-FROM alpine:latest
+FROM ubuntu:18.04 as build-env
 
 ENV DOCUMIZEVERSION=v2.5.1
 
-RUN apk --update add --virtual build-dependencies wget  \
-  && wget -O /usr/local/bin/documize https://github.com/documize/community/releases/download/${DOCUMIZEVERSION}/documize-community-linux-amd64 \
-  && chmod +x /usr/local/bin/documize \
-  && rm -rf /var/cache/apk/* \
-  && apk del build-dependencies
+RUN apt-get update -y \
+    && apt-get install -y wget \
+    && wget -O /usr/local/bin/documize https://github.com/documize/community/releases/download/${DOCUMIZEVERSION}/documize-community-linux-amd64 \
+    && chmod +x /usr/local/bin/documize
 
-ENTRYPOINT /usr/local/bin/documize
+FROM gcr.io/distroless/static
+COPY --from=build-env /usr/local/bin/documize /
+ENTRYPOINT ["/documize"]
