@@ -1,6 +1,6 @@
 FROM ubuntu:18.04 as build-env
 
-ENV DOCUMIZEVERSION=v2.5.1
+ENV DOCUMIZEVERSION=v3.0.0
 
 RUN apt-get update -y \
     && apt-get install -y wget \
