@@ -1,6 +1,6 @@
 FROM ubuntu:20.04 as build-env
 
-ENV DOCUMIZEVERSION=v3.8.0
+ENV DOCUMIZEVERSION=v3.8.2
 
 RUN apt-get update -y \
     && apt-get install -y wget \
